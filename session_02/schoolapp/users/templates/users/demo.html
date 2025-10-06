@@ -1,0 +1,113 @@
+<!-- Simple Dropdown Menu Demo -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Dropdown Menu</title>
+  <style>
+    /* Basic reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+
+    /* Menu container */
+    .menu {
+      list-style: none;
+      display: flex;
+      background-color: #333;
+    }
+
+    /* Menu items */
+    .menu > li {
+      position: relative; /* Important for dropdown positioning */
+    }
+
+    .menu > li > a {
+      display: block;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .menu > li > a:hover {
+      background-color: #555;
+    }
+
+    /* Dropdown submenu */
+    .dropdown {
+      position: absolute; /* Position relative to parent li */
+      top: 100%; /* Start right below the parent */
+      left: 0;
+      background-color: #444;
+      min-width: 200px;
+      list-style: none;
+      display: none; /* Hidden by default */
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown li a:hover {
+      background-color: #666;
+    }
+
+    /* Show dropdown on hover */
+    .menu > li:hover .dropdown {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Simple Dropdown Menu Example</h1>
+  <br>
+  
+  <ul class="menu">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a>
+    <ul class="dropdown">
+        <li><a href="#">Web Development</a></li>
+        <li><a href="#">Mobile Development</a></li>
+        <li><a href="#">Marketing</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    
+    </li>
+    <li>
+      <a href="#">Services</a>
+      <!-- This is the dropdown -->
+      <ul class="dropdown">
+        <li><a href="#">Web Development</a></li>
+        <li><a href="#">Mobile Development</a></li>
+        <li><a href="#">Marketing</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+
+  <div style="padding: 30px 0;">
+    <h2>How the dropdown works:</h2>
+    <ol style="line-height: 1.6; margin-left: 20px;">
+      <li><strong>HTML Structure:</strong> Main menu (ul) with nested submenu (ul) inside a list item</li>
+      <li><strong>CSS Position:</strong> Parent li has "position: relative", dropdown has "position: absolute"</li>
+      <li><strong>Hidden by default:</strong> Dropdown has "display: none"</li>
+      <li><strong>Show on hover:</strong> ":hover" selector changes to "display: block"</li>
+      <li><strong>Positioning:</strong> "top: 100%" places dropdown right below the parent menu item</li>
+    </ol>
+    
+    <h3 style="margin-top: 20px;">Key CSS Properties:</h3>
+    <ul style="line-height: 1.6; margin-left: 20px;">
+      <li><code>position: relative</code> on parent creates positioning context</li>
+      <li><code>position: absolute</code> on dropdown removes it from normal flow</li>
+      <li><code>display: none/block</code> controls visibility</li>
+      <li><code>:hover</code> pseudo-class triggers the dropdown</li>
+    </ul>
+  </div>
+
+</body>
+</html>

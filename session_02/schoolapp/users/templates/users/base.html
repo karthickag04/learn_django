@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- App-Specific CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    
+</head>
+<body>
+    <!-- ======= Header / Navbar ======= -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="index.php">
+      <img src="{% static 'images/web-logo.png' %}" alt="BHC Logo" class="img-fluid" style="max-height: 60px;">
+      <!-- <img src="{% static 'users/images/web-logo1.png' %}" alt="BHC Logo" class="img-fluid" style="max-height: 60px;"> -->
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bhcNavbar" aria-controls="bhcNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav Menu -->
+    <div class="collapse navbar-collapse" id="bhcNavbar">
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link active" href="index.php">Home</a>
+        </li>
+
+        <!-- About BHC -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            About BHC
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+            <li><a class="dropdown-item" href="about.php">Genesis of BHC</a></li>
+            <li><a class="dropdown-item" href="corevalues.php">Core Values</a></li>
+            <li><a class="dropdown-item" href="conduct.php">Code of Conduct</a></li>
+            <li><a class="dropdown-item" href="accreditation.php">Accreditation</a></li>
+            <li><a class="dropdown-item" href="best_practices.php">Best Practices</a></li>
+            <li><a class="dropdown-item" href="roll_of_honor.php">Roll of Honours</a></li>
+            <li><a class="dropdown-item" href="../documents/ASSETS_AQUIRED_(DBT-STAR-COLLEGE).pdf">DBT-STAR COLLEGE SCHEME</a></li>
+            <li><a class="dropdown-item" href="logo.php">Downloads</a></li>
+            <li><a class="dropdown-item" href="contact.php">Contact Us</a></li>
+          </ul>
+        </li>
+
+        <!-- Governance -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="governanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Governance
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="governanceDropdown">
+            <li><a class="dropdown-item" href="administrator.php">Administrators</a></li>
+            <li><a class="dropdown-item" href="autonomy_governbody.php">Autonomy Governing Board</a></li>
+            <li><a class="dropdown-item" href="academic-council.php">Academic Council</a></li>
+            <li><a class="dropdown-item" href="governing_body.php">Governing Board</a></li>
+
+            <!-- Deaneries (Sub-dropdown) -->
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle" href="#">Deaneries</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="deans.php">Dean's Profile</a></li>
+                <li><a class="dropdown-item" href="academics.php">Academics</a></li>
+                <li><a class="dropdown-item" href="dean_iqac.php">IQAC</a></li>
+                <li><a class="dropdown-item" href="randd.php">Research & Development</a></li>
+                <li><a class="dropdown-item" href="ir1.php">International Relations</a></li>
+                <li><a class="dropdown-item" href="tp.php">Training & Placement</a></li>
+                <li><a class="dropdown-item" href="ssw1.php">Staff & Student Welfare</a></li>
+                <li><a class="dropdown-item" href="ea.php">Extension Activities</a></li>
+              </ul>
+            </li>
+
+            <li><a class="dropdown-item" href="staff_council.php">Staff Council</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/documents/STUDENT_COUNCIL.pdf">Student Council</a></li>
+            <li><a class="dropdown-item" href="policy.php">Institutional Policies</a></li>
+
+            <!-- Support Staff (Sub-dropdown) -->
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle" href="#">Support Staff</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/staff_nt_aided.php?record_count=18">Aided</a></li>
+                <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/staff_nt_sfs_office.php?record_count=25">Self-Financing (Office)</a></li>
+                <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/staff_nt_sfs_hostel_mess.php?record_count=25">Self-Financing (Hostel & Mess)</a></li>
+                <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/it_support_staff.php?record_count=25">IT Support</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Admission -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="admissionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Admission
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="admissionDropdown">
+            <li><a class="dropdown-item" href="http://115.245.30.249:10015/lp.aspx">Admission 2025-26</a></li>
+            <li><a class="dropdown-item" href="http://115.245.30.249:10015/lp.aspx">Prospectus</a></li>
+            <li><a class="dropdown-item" href="ug_prog.php">Under Graduate Programme</a></li>
+            <li><a class="dropdown-item" href="pg_prog.php">Post Graduate Programme</a></li>
+            <li><a class="dropdown-item" href="mphil_phd_prog.php">Research Programme</a></li>
+            <li><a class="dropdown-item" href="rules1.php">Rules & Regulations</a></li>
+            <li><a class="dropdown-item" href="int_admisssion.php">International Admission</a></li>
+          </ul>
+        </li>
+
+        <!-- Academics -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="academicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Academics
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="academicsDropdown">
+            <li><a class="dropdown-item" href="departments-list.php">Departments</a></li>
+            <li><a class="dropdown-item" href="centres-list.php">Heber Centres</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/randd.php">Research & Development</a></li>
+            <li><a class="dropdown-item" href="https://library.bhc.edu.in">Library</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/coe_office/index.php">Controller of Examinations</a></li>
+            <li><a class="dropdown-item" href="facilities.php">College Facilities</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/documents/Vision_Heber.pdf">Heber Vision</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/calendar/calender.php">College Calendar</a></li>
+            <li><a class="dropdown-item" href="#" onclick="alert('For Student Verification: Contact studentverify@bhc.edu.in')">For Student Verification</a></li>
+          </ul>
+        </li>
+
+        <!-- Campus Life -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="campusDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Campus Life
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="campusDropdown">
+            <li><a class="dropdown-item" href="rlc.php">RLC :: Prayer Life</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/PE/applications.php">Sports</a></li>
+            <li><a class="dropdown-item" href="cdse.php">Capacity Development & Skill Enhancement</a></li>
+            <li><a class="dropdown-item" href="antiragging.php">Anti-Ragging Committee</a></li>
+            <li><a class="dropdown-item" href="icc.php">Internal Complaints Committee</a></li>
+            <li><a class="dropdown-item" href="antisexual.php">Anti-Sexual Harassment Committee</a></li>
+            <li><a class="dropdown-item" href="eoc.php">Equal Opportunity Centre (EOC)</a></li>
+          </ul>
+        </li>
+
+        <!-- Facilities -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="facilitiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Facilities
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="facilitiesDropdown">
+            <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/chcf.php">Health Care</a></li>
+            <li><a class="dropdown-item" href="cafes.php">Cafeteria</a></li>
+            <li><a class="dropdown-item" href="bus.php">Transport Facilities</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/hostel_details.php">Hostels</a></li>
+            <li><a class="dropdown-item" href="https://bhc.edu.in/bhc/haif.php">Instrumentation Facility (HAIF)</a></li>
+
+            <!-- Scholarships (Sub-dropdown) -->
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle" href="#">Scholarships</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="scholarship23.php">Government Scholarship</a></li>
+                <li><a class="dropdown-item" href="management_scholarship.php">Management Scholarship</a></li>
+              </ul>
+            </li>
+
+            <li><a class="dropdown-item" href="https://bhc.edu.in/ignou/">IGNOU</a></li>
+            <li><a class="dropdown-item" href="greencampus.php">Green Campus</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- ======= End Header ======= -->
+
+  
+  
+  
+    {% block content %}
+
+
+    {% endblock %}
+
+    
+
+
+    
+</body>
+</html>

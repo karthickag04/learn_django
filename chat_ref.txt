@@ -1,2 +1,6 @@
 Chat Ref on Static file loading
 https://chatgpt.com/share/68e395e9-1f24-800b-a7ea-75285f4d6229
+
+
+chat ref added for session_03 and further folder structure for creating new apps
+https://chatgpt.com/share/68e8d374-5b68-800b-862b-2b454de94a9f

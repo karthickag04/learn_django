@@ -1,0 +1,15 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block content %}
+<h2>Login</h2>
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+
+<form method="post" action="">
+    {{ login_form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+{% endblock %}

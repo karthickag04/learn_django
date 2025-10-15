@@ -1,0 +1,97 @@
+.register-container {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    margin: 50px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    font-size: larger;
+}
+
+
+.menu-container {
+      list-style: none;
+      display: flex;
+      background-color: #333;
+      
+
+    }
+
+  .menu-right{
+    margin-left: auto;
+    display: flex;
+    list-style: none;
+    background-color: #333;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+  }
+  .menu-right li a {
+      display: block;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .menu-right li a:hover {
+      background-color: #555;
+    }
+
+
+
+
+/* Basic reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+
+    /* Menu container */
+    .menu {
+      list-style: none;
+      display: flex;
+      background-color: #333;
+    }
+
+    /* Menu items */
+    .menu > li {
+      position: relative; /* Important for dropdown positioning */
+    }
+
+    .menu > li > a {
+      display: block;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .menu > li > a:hover {
+      background-color: #555;
+    }
+
+    /* Dropdown submenu */
+    .dropdown {
+      position: absolute; /* Position relative to parent li */
+      top: 100%; /* Start right below the parent */
+      left: 0;
+      background-color: #444;
+      min-width: 200px;
+      list-style: none;
+      display: none; /* Hidden by default */
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .dropdown li a:hover {
+      background-color: #666;
+    }
+
+    /* Show dropdown on hover */
+    .menu > li:hover .dropdown {
+      display: block;
+    }

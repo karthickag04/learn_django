@@ -13,3 +13,6 @@ https://chatgpt.com/share/68eccbdb-4170-800b-aea4-f4efcaf7fc7f
 chat ref added of forms usage from django forms
 https://chatgpt.com/share/68ef749c-f70c-800b-8f8d-98c30840ff63
 
+chat ref added of forms usage from django forms - updated
+https://chatgpt.com/share/68f0b39b-a5fc-800b-9e88-e262fe5747b6
+

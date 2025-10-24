@@ -13,3 +13,26 @@ https://chatgpt.com/share/68eccbdb-4170-800b-aea4-f4efcaf7fc7f
 chat ref added of forms usage from django forms
 https://chatgpt.com/share/68ef749c-f70c-800b-8f8d-98c30840ff63
 
+chat ref added of forms usage from django forms - updated
+https://chatgpt.com/share/68f0b39b-a5fc-800b-9e88-e262fe5747b6
+
+
+
+# need to practice below step by step
+
+Chat reference to add Jazzmin Theme to admin module
+https://chatgpt.com/share/68f9f5b9-83d8-800b-9e08-7ff9be967cf7
+
+steps to access admin/ module with username and password by creating using "python manage.py createsuperuser"
+https://chatgpt.com/share/68fb578f-84c0-800b-96c9-be9b11fa2950
+
+chat reference to make registration to use inbuilt django admin's user_auth table to store the user under each group named students and teachers
+https://chatgpt.com/share/68fb54bd-8e84-800b-a23c-2f500f380e5f
+
+
+chat reference to make regitered user to login view login page to land in to students/index.html or teachers/index.html based on the role
+https://chatgpt.com/share/68fb5581-4680-800b-bdd5-ac310221947e
+
+
+chat reference to migrate to SQLite to MySQL
+https://chatgpt.com/share/68fb56e1-84dc-800b-8362-0092420bd2de

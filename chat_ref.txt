@@ -36,3 +36,6 @@ https://chatgpt.com/share/68fb5581-4680-800b-bdd5-ac310221947e
 
 chat reference to migrate to SQLite to MySQL
 https://chatgpt.com/share/68fb56e1-84dc-800b-8362-0092420bd2de
+
+Project flow for creating new app and html files to start and understand 
+https://chatgpt.com/share/6900850a-fa74-800b-a422-2aa0ad6894b6

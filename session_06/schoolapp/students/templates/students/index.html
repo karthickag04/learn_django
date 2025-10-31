@@ -1,0 +1,74 @@
+{% extends 'students/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Student Dashboard - College Management System</title>
+
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+{% endblock head %}
+
+
+{% block content %}
+
+
+
+
+<header>
+  <h1>College Management System</h1>
+  <div class="user-info">
+    Welcome, <strong>John Doe</strong> | <a href="#" style="color: #ecf0f1;">Logout</a>
+  </div>
+</header>
+
+<section class="dashboard">
+  <div class="card">
+    <h3>Attendance</h3>
+    <p class="summary-value">92%</p>
+    <p>This semester average</p>
+  </div>
+
+  <div class="card">
+    <h3>CGPA</h3>
+    <p class="summary-value">8.7</p>
+    <p>Overall performance</p>
+  </div>
+
+  <div class="card">
+    <h3>Next Exam</h3>
+    <p><strong>Database Systems</strong></p>
+    <p>On 12 Nov 2025</p>
+  </div>
+</section>
+
+<div class="section">
+  <div class="notices">
+    <h2>📢 Latest Notices</h2>
+    <ul>
+      <li>⚙️ Lab sessions rescheduled to Friday.</li>
+      <li>🎓 Project submission deadline: Nov 10.</li>
+      <li>📚 Mid-sem results out on portal.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section">
+  <div class="events">
+    <h2>📅 Upcoming Events</h2>
+    <ul>
+      <li>Sports Day - Nov 15</li>
+      <li>Tech Fest - Dec 3</li>
+      <li>Semester Break - Starts Dec 20</li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+<footer>
+  <p>© 2025 Your College Name. All Rights Reserved.</p>
+</footer>
+
+{% endblock %}

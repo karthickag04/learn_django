@@ -47,5 +47,9 @@ SchoolApp - login change to accept users from database
 https://chatgpt.com/share/69047798-dcb4-800b-aebe-5151630add47
 
 
+Model creation example flow - read this but use next chat ref for implementation
+https://chatgpt.com/share/69047894-2158-800b-97b1-124c3ca4adf7
+
+
 SchoolApp - implementing student_profile and feedback model implementation under students and teachers module after login successful login
 https://chatgpt.com/share/690475f6-87f0-800b-8fff-a489823fae4d

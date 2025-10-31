@@ -43,5 +43,9 @@ https://chatgpt.com/share/6900850a-fa74-800b-a422-2aa0ad6894b6
 SchoolApp project strucute complete reference
 https://chatgpt.com/share/690475bc-3008-800b-87fb-d0bad57609cb
 
+SchoolApp - login change to accept users from database
+https://chatgpt.com/share/69047798-dcb4-800b-aebe-5151630add47
+
+
 SchoolApp - implementing student_profile and feedback model implementation under students and teachers module after login successful login
 https://chatgpt.com/share/690475f6-87f0-800b-8fff-a489823fae4d

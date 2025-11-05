@@ -1,0 +1,178 @@
+{% extends 'students/base.html' %}
+
+{% block title %}My Assignments{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            {% if user.role == 'student' %}
+                My Assignments
+            {% else %}
+                All Student Assignments
+            {% endif %}
+        </h2>
+        {% if user.role == 'student' and available_lectures %}
+            <a href="{% url 'students:upload_assignment' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Submit New Assignment
+            </a>
+        {% endif %}
+    </div>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- Available Lectures for Assignment Submission -->
+    {% if user.role == 'student' and available_lectures %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Available Lectures for Assignment Submission</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for lecture in available_lectures %}
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="card border-info">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ lecture.title }}</h6>
+                                    <p class="card-text">{{ lecture.description|truncatewords:15 }}</p>
+                                    <small class="text-muted">By: {{ lecture.teacher.username }}</small>
+                                    <div class="mt-2">
+                                        <a href="{% url 'students:upload_assignment' lecture.id %}" class="btn btn-sm btn-primary">
+                                            Submit Assignment
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    
+    <!-- Submitted Assignments -->
+    {% if page_obj %}
+        <div class="card">
+            <div class="card-header">
+                <h5>
+                    {% if user.role == 'student' %}
+                        Submitted Assignments
+                    {% else %}
+                        All Submissions
+                    {% endif %}
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for assignment in page_obj %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">{{ assignment.lecture.title }}</h6>
+                                    {% if user.role != 'student' %}
+                                        <small class="text-muted">Student: {{ assignment.student.username }}</small>
+                                    {% endif %}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ assignment.lecture.description|truncatewords:15 }}</p>
+                                    
+                                    {% if assignment.video_answer %}
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Video Answer:</label>
+                                            <video width="100%" height="150" controls>
+                                                <source src="{{ assignment.video_answer.url }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                            <div class="mt-1">
+                                                <a href="{{ assignment.video_answer.url }}" download class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-download"></i> Download
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    
+                                    {% if assignment.audio_answer %}
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Audio Answer:</label>
+                                            <audio width="100%" controls>
+                                                <source src="{{ assignment.audio_answer.url }}" type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                            <div class="mt-1">
+                                                <a href="{{ assignment.audio_answer.url }}" download class="btn btn-sm btn-outline-success">
+                                                    <i class="bi bi-download"></i> Download
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">
+                                        Submitted: {{ assignment.submitted_at|date:"M d, Y H:i" }}
+                                    </small>
+                                    <div class="mt-1">
+                                        <span class="badge bg-success">Submitted</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+            <nav aria-label="Assignments pagination" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+                    
+                    <li class="page-item active">
+                        <span class="page-link">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+                    </li>
+                    
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+    {% else %}
+        <div class="text-center py-5">
+            <i class="bi bi-file-earmark-check" style="font-size: 4rem; color: #6c757d;"></i>
+            <h4 class="mt-3">No assignments found</h4>
+            <p class="text-muted">
+                {% if user.role == 'student' %}
+                    You haven't submitted any assignments yet.
+                {% else %}
+                    No student assignments have been submitted yet.
+                {% endif %}
+            </p>
+            {% if user.role == 'student' and available_lectures %}
+                <a href="{% url 'students:upload_assignment' %}" class="btn btn-primary">Submit Your First Assignment</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

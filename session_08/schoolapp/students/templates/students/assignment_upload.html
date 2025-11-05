@@ -1,0 +1,130 @@
+{% extends 'students/base.html' %}
+
+{% block title %}Submit Assignment{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Submit Assignment</h2>
+        <a href="{% url 'students:assignment_list' %}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Assignments
+        </a>
+    </div>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% if lecture %}
+        <div class="alert alert-info">
+            <h6>Assignment for: {{ lecture.title }}</h6>
+            <p>{{ lecture.description|truncatewords:30 }}</p>
+            <small>By: {{ lecture.teacher.username }} | Posted: {{ lecture.uploaded_at|date:"M d, Y" }}</small>
+        </div>
+    {% endif %}
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Upload Your Assignment</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% if not lecture %}
+                            <div class="mb-3">
+                                <label for="{{ form.lecture.id_for_label }}" class="form-label">Select Lecture</label>
+                                {{ form.lecture }}
+                                {% if form.lecture.errors %}
+                                    <div class="text-danger">{{ form.lecture.errors }}</div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <input type="hidden" name="lecture" value="{{ lecture.id }}">
+                        {% endif %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.video_answer.id_for_label }}" class="form-label">Video Answer</label>
+                            {{ form.video_answer }}
+                            {% if form.video_answer.errors %}
+                                <div class="text-danger">{{ form.video_answer.errors }}</div>
+                            {% endif %}
+                            <div class="form-text">Upload your video response (Optional if audio is provided)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.audio_answer.id_for_label }}" class="form-label">Audio Answer</label>
+                            {{ form.audio_answer }}
+                            {% if form.audio_answer.errors %}
+                                <div class="text-danger">{{ form.audio_answer.errors }}</div>
+                            {% endif %}
+                            <div class="form-text">Upload your audio response (Optional if video is provided)</div>
+                        </div>
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                        {% endif %}
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{% url 'students:assignment_list' %}" class="btn btn-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-success">Submit Assignment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6>Submission Guidelines</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check-circle text-success"></i> Upload at least one answer file</li>
+                        <li><i class="bi bi-check-circle text-success"></i> Video: Max 200MB</li>
+                        <li><i class="bi bi-check-circle text-success"></i> Audio: Max 100MB</li>
+                        <li><i class="bi bi-info-circle text-info"></i> One submission per lecture</li>
+                        <li><i class="bi bi-exclamation-circle text-warning"></i> Cannot edit after submission</li>
+                    </ul>
+                </div>
+            </div>
+            
+            {% if lecture and lecture.video %}
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h6>Lecture Video</h6>
+                    </div>
+                    <div class="card-body">
+                        <video width="100%" height="150" controls>
+                            <source src="{{ lecture.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            {% endif %}
+            
+            {% if lecture and lecture.audio %}
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h6>Lecture Audio</h6>
+                    </div>
+                    <div class="card-body">
+                        <audio width="100%" controls>
+                            <source src="{{ lecture.audio.url }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

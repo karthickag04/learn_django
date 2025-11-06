@@ -1,0 +1,171 @@
+{% extends 'students/base.html' %}
+{% load static %}
+
+{% block title %}My Assignments{% endblock %}
+
+{% block content %}
+<div class="form-container" style="max-width: 1200px;">
+    <h2 class="form-title">
+        {% if user.role == 'student' %}
+            📚 My Assignments
+        {% else %}
+            👥 All Student Assignments
+        {% endif %}
+    </h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <!-- Available Lectures for Assignment Submission -->
+    {% if user.role == 'student' and available_lectures %}
+        <div class="card" style="margin-bottom: 30px;">
+            <div class="card-header">🎯 Available Lectures for Assignment Submission</div>
+            <div class="card-body">
+                <div class="dashboard-grid">
+                    {% for lecture in available_lectures %}
+                        <div class="card" style="border: 2px solid #007bff;">
+                            <div class="card-header">{{ lecture.title }}</div>
+                            <div class="card-body">
+                                <p>{{ lecture.description|truncatewords:15 }}</p>
+                                <small style="color: #666;">By: {{ lecture.teacher.username }}</small>
+                                <div style="margin-top: 15px;">
+                                    <a href="{% url 'students:upload_assignment' lecture.id %}" class="btn btn-primary">
+                                        📝 Submit Assignment
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    
+    <!-- Quick Actions -->
+    {% if user.role == 'student' and available_lectures %}
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="{% url 'students:upload_assignment' %}" class="btn btn-success">
+                ➕ Submit New Assignment
+            </a>
+        </div>
+    {% endif %}
+    
+    <!-- Submitted Assignments -->
+    {% if page_obj %}
+        <div class="card">
+            <div class="card-header">
+                {% if user.role == 'student' %}
+                    ✅ Submitted Assignments
+                {% else %}
+                    📋 All Submissions
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div class="dashboard-grid">
+                    {% for assignment in page_obj %}
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>{{ assignment.lecture.title }}</strong>
+                                {% if user.role != 'student' %}
+                                    <br><small style="color: #666;">Student: {{ assignment.student.username }}</small>
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <p>{{ assignment.lecture.description|truncatewords:15 }}</p>
+                                
+                                {% if assignment.video_answer %}
+                                    <div style="margin-bottom: 15px;">
+                                        <strong>📹 Video Answer:</strong>
+                                        <video width="100%" height="150" controls style="margin-top: 8px; border-radius: 8px;">
+                                            <source src="{{ assignment.video_answer.url }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div style="margin-top: 8px;">
+                                            <a href="{{ assignment.video_answer.url }}" download class="btn btn-secondary" style="font-size: 12px; padding: 5px 10px;">
+                                                💾 Download Video
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                
+                                {% if assignment.audio_answer %}
+                                    <div style="margin-bottom: 15px;">
+                                        <strong>🎤 Audio Answer:</strong>
+                                        <audio width="100%" controls style="margin-top: 8px; width: 100%;">
+                                            <source src="{{ assignment.audio_answer.url }}" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        <div style="margin-top: 8px;">
+                                            <a href="{{ assignment.audio_answer.url }}" download class="btn btn-secondary" style="font-size: 12px; padding: 5px 10px;">
+                                                💾 Download Audio
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                
+                                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0;">
+                                    <small style="color: #666;">
+                                        Submitted: {{ assignment.submitted_at|date:"M d, Y H:i" }}
+                                    </small>
+                                    <div style="margin-top: 5px;">
+                                        <span style="background-color: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px;">
+                                            ✅ Submitted
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+            <div style="text-align: center; margin-top: 30px;">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="btn btn-secondary" style="margin: 0 5px;">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary" style="margin: 0 5px;">Previous</a>
+                {% endif %}
+                
+                <span style="margin: 0 15px; font-weight: bold;">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary" style="margin: 0 5px;">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-secondary" style="margin: 0 5px;">Last</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% else %}
+        <div style="text-align: center; padding: 60px 20px;">
+            <div style="font-size: 64px; color: #ccc; margin-bottom: 20px;">📝</div>
+            <h4>No assignments found</h4>
+            <p style="color: #666; margin-bottom: 30px;">
+                {% if user.role == 'student' %}
+                    You haven't submitted any assignments yet.
+                {% else %}
+                    No student assignments have been submitted yet.
+                {% endif %}
+            </p>
+            {% if user.role == 'student' and available_lectures %}
+                <a href="{% url 'students:upload_assignment' %}" class="btn btn-primary">
+                    🚀 Submit Your First Assignment
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'students:index' %}" class="btn btn-secondary">
+            ← Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

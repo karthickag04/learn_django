@@ -1,0 +1,99 @@
+{% extends 'users/master.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Register</h2>
+
+                    <form action="" method="post" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.username.id_for_label }}" class="form-label">Username</label>
+                            {{ register_form.username }}
+                            {% if register_form.username.errors %}
+                                <div class="text-danger small">{{ register_form.username.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.email.id_for_label }}" class="form-label">Email</label>
+                            {{ register_form.email }}
+                            {% if register_form.email.errors %}
+                                <div class="text-danger small">{{ register_form.email.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.password1.id_for_label }}" class="form-label">Password</label>
+                            {{ register_form.password1 }}
+                            {% if register_form.password1.errors %}
+                                <div class="text-danger small">{{ register_form.password1.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.password2.id_for_label }}" class="form-label">Confirm Password</label>
+                            {{ register_form.password2 }}
+                            {% if register_form.password2.errors %}
+                                <div class="text-danger small">{{ register_form.password2.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Role -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.role.id_for_label }}" class="form-label">Register As</label>
+                            {{ register_form.role }}
+                            {% if register_form.role.errors %}
+                                <div class="text-danger small">{{ register_form.role.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+                            {{ register_form.phone_number }}
+                            {% if register_form.phone_number.errors %}
+                                <div class="text-danger small">{{ register_form.phone_number.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.address.id_for_label }}" class="form-label">Address</label>
+                            {{ register_form.address }}
+                            {% if register_form.address.errors %}
+                                <div class="text-danger small">{{ register_form.address.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="mb-3">
+                            <label for="{{ register_form.date_of_birth.id_for_label }}" class="form-label">Date of Birth</label>
+                            {{ register_form.date_of_birth }}
+                            {% if register_form.date_of_birth.errors %}
+                                <div class="text-danger small">{{ register_form.date_of_birth.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+
+                    {% for message in messages %}
+                        <p class="text-success text-center mt-3">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

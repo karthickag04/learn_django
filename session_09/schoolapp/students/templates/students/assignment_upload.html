@@ -1,0 +1,120 @@
+{% extends 'students/base.html' %}
+{% load static %}
+
+{% block title %}Submit Assignment{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">📤 Submit Assignment</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% if lecture %}
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">Assignment for: {{ lecture.title }}</div>
+            <div class="card-body">
+                <p>{{ lecture.description|truncatewords:30 }}</p>
+                <small>By: {{ lecture.teacher.username }} | Posted: {{ lecture.uploaded_at|date:"M d, Y" }}</small>
+            </div>
+        </div>
+    {% endif %}
+    
+    <form method="post" enctype="multipart/form-data" class="assignment-form">
+        {% csrf_token %}
+        
+        {% if not lecture %}
+            <div class="form-group">
+                <label for="{{ form.lecture.id_for_label }}" class="form-label">Select Lecture *</label>
+                {{ form.lecture }}
+                {% if form.lecture.errors %}
+                    <div class="text-danger">{{ form.lecture.errors }}</div>
+                {% endif %}
+            </div>
+        {% else %}
+            <input type="hidden" name="lecture" value="{{ lecture.id }}">
+        {% endif %}
+        
+        <div class="file-upload-area">
+            <div class="form-group">
+                <label for="{{ form.video_answer.id_for_label }}" class="form-label">📹 Video Answer</label>
+                {{ form.video_answer }}
+                {% if form.video_answer.errors %}
+                    <div class="text-danger">{{ form.video_answer.errors }}</div>
+                {% endif %}
+                <small style="color: #666;">Upload your video response (Optional if audio is provided)</small>
+            </div>
+        </div>
+        
+        <div class="file-upload-area" style="margin-top: 20px;">
+            <div class="form-group">
+                <label for="{{ form.audio_answer.id_for_label }}" class="form-label">🎤 Audio Answer</label>
+                {{ form.audio_answer }}
+                {% if form.audio_answer.errors %}
+                    <div class="text-danger">{{ form.audio_answer.errors }}</div>
+                {% endif %}
+                <small style="color: #666;">Upload your audio response (Optional if video is provided)</small>
+            </div>
+        </div>
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-error">{{ form.non_field_errors }}</div>
+        {% endif %}
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="{% url 'students:assignment_list' %}" class="btn btn-secondary" style="margin-right: 10px;">
+                ← Cancel
+            </a>
+            <button type="submit" class="btn btn-success">
+                ✅ Submit Assignment
+            </button>
+        </div>
+    </form>
+    
+    {% if lecture %}
+        <div class="dashboard-grid" style="margin-top: 30px;">
+            {% if lecture.video %}
+                <div class="card">
+                    <div class="card-header">🎥 Lecture Video</div>
+                    <div class="card-body">
+                        <video width="100%" height="200" controls style="border-radius: 8px;">
+                            <source src="{{ lecture.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            {% endif %}
+            
+            {% if lecture.audio %}
+                <div class="card">
+                    <div class="card-header">🎵 Lecture Audio</div>
+                    <div class="card-body">
+                        <audio width="100%" controls style="width: 100%;">
+                            <source src="{{ lecture.audio.url }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-header">📋 Submission Guidelines</div>
+        <div class="card-body">
+            <ul style="margin: 0; padding-left: 20px;">
+                <li>✅ Upload at least one answer file (video or audio)</li>
+                <li>📹 Video: Maximum 200MB</li>
+                <li>🎤 Audio: Maximum 100MB</li>
+                <li>📝 One submission per lecture allowed</li>
+                <li>⚠️ Cannot edit after submission</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

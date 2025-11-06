@@ -1,0 +1,36 @@
+{% extends 'users/master.html' %}
+{% load static %}
+
+{% block content %}
+<header>
+    <div class="header-title">
+        <img src="{% static 'images/web-logo.png' %}" alt="">
+        <h1>TMYS School</h1>
+    </div>
+    <p>Delivering quality education with practical, future-ready skills.</p>
+</header>
+
+<section id="about">
+    <h2>About TMYS</h2>
+    <p>TMYS is a modern learning community focused on academic excellence, hands‑on learning, and character development.</p>
+</section>
+
+<section id="highlights" aria-labelledby="highlights-title">
+    <h2 id="highlights-title">Highlights</h2>
+    <ul>
+        <li>Experienced faculty and student-centered teaching</li>
+        <li>Modern labs and digital classrooms</li>
+        <li>Clubs, sports, and community initiatives</li>
+        <li>Career guidance and counseling</li>
+    </ul>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <address>
+        Email: info@tmys.example<br>
+        Phone: +1 (000) 000‑0000
+    </address>
+</section>
+
+{% endblock %}

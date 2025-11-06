@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}
+    {% endblock %}
+     <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'css/students.css' %}">
+
+    
+    
+</head>
+<body>
+    <!-- ======= Header / Navbar ======= -->
+
+<!-- ======= End Header ======= -->
+<div class="menu-container">
+  <ul class="menu">
+    <li><a href="#">Dashboard</a></li>
+    <li>
+      <a href="#">Academics</a>
+      <ul class="dropdown">
+        <li><a href="#">My Courses</a></li>
+        <li><a href="#">Assignments</a></li>
+        <li><a href="#">Exams</a></li>
+        <li><a href="#">Grades</a></li>
+        <li><a href="#">Attendance</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Schedule</a>
+      <ul class="dropdown">
+        <li><a href="#">Timetable</a></li>
+        <li><a href="#">Calendar</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Resources</a>
+      <ul class="dropdown">
+        <li><a href="#">Library</a></li>
+        <li><a href="#">Downloads</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Support</a></li>
+  </ul>
+  <ul class="menu-right">
+    <li><a href="#">Notifications</a></li>
+    <li><a href="#">Profile</a></li>
+    <li><a href="#">Logout</a></li>
+  </ul>
+</div>
+  <div style="padding: 30px 0;">
+    {% block content %}
+
+
+    {% endblock %}
+
+    </div>
+
+
+    {% block footer %}
+
+    {% endblock %}
+
+    <img src="https://picsum.photos/id/237/1200/900" alt="">
+    <!-- <img src="https://picsum.photos/id/238/200/300" alt="">
+    <img src="https://picsum.photos/id/239/200/300" alt="">
+    <img src="https://picsum.photos/id/234/200/300" alt=""> -->
+    
+</body>
+</html>

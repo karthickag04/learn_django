@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/teachers.css' %}">
+
+
+    
+</head>
+<body>
+    <!-- ======= Header / Navbar ======= -->
+
+<!-- ======= End Header ======= -->
+<div class="menu-container">
+  <ul class="menu">
+    <li><a href="#">Dashboard</a></li>
+    <li>
+      <a href="#">Classes</a>
+      <ul class="dropdown">
+        <li><a href="#">My Classes</a></li>
+        <li><a href="#">Student Roster</a></li>
+        <li><a href="#">Assignments</a></li>
+        <li><a href="#">Gradebook</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Teaching</a>
+      <ul class="dropdown">
+        <li><a href="#">Lesson Plans</a></li>
+        <li><a href="#">Assessments</a></li>
+        <li><a href="#">Materials</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Attendance</a>
+      <ul class="dropdown">
+        <li><a href="{% url 'teachers:attendance_entry' %}">Take Attendance</a></li>
+        <li><a href="{% url 'teachers:attendance_report' %}">Attendance Reports</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Schedule</a>
+      <ul class="dropdown">
+        <li><a href="#">Timetable</a></li>
+        <li><a href="#">Calendar</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Communication</a>
+      <ul class="dropdown">
+        <li><a href="#">Messages</a></li>
+        <li><a href="#">Announcements</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Reports</a></li>
+  </ul>
+  <ul class="menu-right">
+    <li><a href="#">Notifications</a></li>
+    <li><a href="#">Profile</a></li>
+    <li><a href="#">Logout</a></li>
+  </ul>
+</div>
+  <div style="padding: 30px 0;">
+    {% block content %}
+
+
+    {% endblock %}
+
+    </div>
+
+
+    
+</body>
+</html>

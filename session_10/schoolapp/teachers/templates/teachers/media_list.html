@@ -1,0 +1,120 @@
+{% extends 'teachers/base.html' %}
+{% load static %}
+
+{% block title %}Media Library{% endblock %}
+
+{% block content %}
+<div class="form-container" style="max-width: 1200px;">
+    <h2 class="form-title">📚 Media Library</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% if user.role == 'teacher' %}
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="{% url 'teachers:upload_media' %}" class="btn btn-primary">
+                ➕ Upload New Lecture
+            </a>
+        </div>
+    {% endif %}
+    
+    {% if page_obj %}
+        <div class="dashboard-grid">
+            {% for lecture in page_obj %}
+                <div class="card">
+                    <div class="card-header">
+                        <strong>{{ lecture.title }}</strong>
+                        <br><small style="color: #666;">by {{ lecture.teacher.username }}</small>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ lecture.description|truncatewords:20 }}</p>
+                        
+                        {% if lecture.video %}
+                            <div style="margin-bottom: 15px;">
+                                <strong>🎥 Video:</strong>
+                                <video width="100%" height="200" controls style="margin-top: 8px; border-radius: 8px;">
+                                    <source src="{{ lecture.video.url }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div style="margin-top: 8px;">
+                                    <a href="{{ lecture.video.url }}" download class="btn btn-secondary" style="font-size: 12px; padding: 5px 10px;">
+                                        💾 Download Video
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        {% if lecture.audio %}
+                            <div style="margin-bottom: 15px;">
+                                <strong>🎵 Audio:</strong>
+                                <audio width="100%" controls style="margin-top: 8px; width: 100%;">
+                                    <source src="{{ lecture.audio.url }}" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                                <div style="margin-top: 8px;">
+                                    <a href="{{ lecture.audio.url }}" download class="btn btn-secondary" style="font-size: 12px; padding: 5px 10px;">
+                                        💾 Download Audio
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0;">
+                            <small style="color: #666;">
+                                Uploaded: {{ lecture.uploaded_at|date:"M d, Y H:i" }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+            <div style="text-align: center; margin-top: 30px;">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" class="btn btn-secondary" style="margin: 0 5px;">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary" style="margin: 0 5px;">Previous</a>
+                {% endif %}
+                
+                <span style="margin: 0 15px; font-weight: bold;">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary" style="margin: 0 5px;">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-secondary" style="margin: 0 5px;">Last</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% else %}
+        <div style="text-align: center; padding: 60px 20px;">
+            <div style="font-size: 64px; color: #ccc; margin-bottom: 20px;">📹</div>
+            <h4>No lectures found</h4>
+            <p style="color: #666; margin-bottom: 30px;">
+                {% if user.role == 'teacher' %}
+                    Start by uploading your first lecture.
+                {% else %}
+                    No lectures have been uploaded yet.
+                {% endif %}
+            </p>
+            {% if user.role == 'teacher' %}
+                <a href="{% url 'teachers:upload_media' %}" class="btn btn-primary">
+                    🚀 Upload First Lecture
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'teachers:index' %}" class="btn btn-secondary">
+            ← Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

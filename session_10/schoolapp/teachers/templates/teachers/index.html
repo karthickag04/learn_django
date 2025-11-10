@@ -1,0 +1,148 @@
+{% extends 'teachers/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-container" style="max-width: 1200px;">
+    <h2 class="form-title">👩‍🏫 Teacher Dashboard</h2>
+    
+    {% if user.is_authenticated %}
+        <div style="text-align: center; margin-bottom: 30px;">
+            <p style="font-size: 18px; color: #333;">
+                Welcome back, <strong>{{ user.get_full_name|default:user.username }}</strong>!
+            </p>
+        </div>
+    {% endif %}
+    
+    <!-- Quick Actions -->
+    <div class="dashboard-grid" style="margin-bottom: 40px;">
+        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="card-header" style="color: white; border-bottom-color: rgba(255,255,255,0.2);">📹 Upload Content</div>
+            <div class="card-body">
+                <p>Share educational videos and audio lectures</p>
+                <a href="{% url 'teachers:upload_media' %}" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+                    Upload Lecture
+                </a>
+            </div>
+        </div>
+        
+        <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <div class="card-header" style="color: white; border-bottom-color: rgba(255,255,255,0.2);">📚 Media Library</div>
+            <div class="card-body">
+                <p>Manage your uploaded content</p>
+                <a href="{% url 'teachers:media_list' %}" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+                    View Library
+                </a>
+            </div>
+        </div>
+        
+        <div class="card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+            <div class="card-header" style="color: white; border-bottom-color: rgba(255,255,255,0.2);">👥 Students</div>
+            <div class="card-body">
+                <p>Review student submissions</p>
+                <a href="/students/assignments/" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+                    View Submissions
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Teaching Overview -->
+    <div class="card" style="margin-bottom: 30px;">
+        <div class="card-header">📊 Teaching Overview</div>
+        <div class="card-body">
+            <div class="dashboard-grid">
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="color: #28a745; margin: 0;">12</h3>
+                    <p style="margin: 5px 0 0 0; color: #666;">Lectures Uploaded</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="color: #007bff; margin: 0;">45</h3>
+                    <p style="margin: 5px 0 0 0; color: #666;">Student Submissions</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="color: #ffc107; margin: 0;">8</h3>
+                    <p style="margin: 5px 0 0 0; color: #666;">Pending Reviews</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="dashboard-grid">
+        <div class="card">
+            <div class="card-header">📋 Teaching Resources</div>
+            <div class="card-body">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        📹 Video formats: MP4, AVI, MOV, WMV
+                    </li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        🎵 Audio formats: MP3, WAV, OGG, M4A
+                    </li>
+                    <li style="padding: 10px 0;">
+                        💾 Maximum file size: 100MB per upload
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">🎯 Teaching Tips</div>
+            <div class="card-body">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        📝 Use clear, descriptive titles
+                    </li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        🎤 Ensure good audio quality
+                    </li>
+                    <li style="padding: 10px 0;">
+                        ⏱️ Keep lectures focused and concise
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Stats -->
+    <div class="card" style="margin-top: 30px;">
+        <div class="card-header">⚡ Quick Actions</div>
+        <div class="card-body" style="text-align: center;">
+            <a href="{% url 'teachers:upload_media' %}" class="btn btn-primary" style="margin: 0 10px 10px 0;">
+                📤 Upload New Lecture
+            </a>
+            <a href="{% url 'teachers:media_list' %}" class="btn btn-success" style="margin: 0 10px 10px 0;">
+                📚 Manage Library
+            </a>
+            <a href="/students/assignments/" class="btn btn-secondary" style="margin: 0 10px 10px 0;">
+                👥 Review Submissions
+            </a>
+        </div>
+    </div>
+    
+    <!-- System Information -->
+    <div class="card" style="margin-top: 30px;">
+        <div class="card-header">ℹ️ System Information</div>
+        <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div>
+                    <strong>📊 File Upload Limits:</strong>
+                    <br>Video: 100MB | Audio: 50MB
+                </div>
+                <div>
+                    <strong>🎯 Supported Formats:</strong>
+                    <br>MP4, MP3, WAV, AVI, MOV
+                </div>
+                <div>
+                    <strong>👥 Student Access:</strong>
+                    <br>All uploads instantly available
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 20px; margin-top: 40px; color: #666; border-top: 1px solid #e0e0e0;">
+    <p>© 2025 TMYS School Management System. All Rights Reserved.</p>
+</footer>
+{% endblock %}

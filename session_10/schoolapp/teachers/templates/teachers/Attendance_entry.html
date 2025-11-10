@@ -1,0 +1,33 @@
+{% extends 'teachers/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>This is the Attendance Entry Page</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for student in studentlist %}
+        <div style="margin-bottom: 10px; padding: 10px; border: 1px solid #ddd;">
+            <label>
+                {% if student.first_name and student.last_name %}
+                    {{ student.first_name }} {{ student.last_name }}
+                {% elif student.first_name %}
+                    {{ student.first_name }}
+                {% else %}
+                    {{ student.username }}
+                {% endif %}
+                <small>({{ student.username }})</small>
+            </label>
+            <input type="hidden" name="student_id" value="{{ student.id }}">
+            <select name="{{ student.id }}" required>
+                <option value="">Select Attendance</option>
+                <option value="present">Present</option>
+                <option value="absent">Absent</option>
+            </select>
+        </div>
+    {% endfor %}
+    <button type="submit">Submit Attendance</button>
+</form>
+
+
+{% endblock %}

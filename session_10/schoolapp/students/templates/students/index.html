@@ -1,0 +1,127 @@
+{% extends 'students/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-container" style="max-width: 1200px;">
+    <h2 class="form-title">🎓 Student Dashboard</h2>
+    
+    {% if user.is_authenticated %}
+        <div style="text-align: center; margin-bottom: 30px;">
+            <p style="font-size: 18px; color: #333;">
+                Welcome back, <strong>{{ user.get_full_name|default:user.username }}</strong>!
+            </p>
+        </div>
+    {% endif %}
+    
+    <!-- Quick Actions -->
+    <div class="dashboard-grid" style="margin-bottom: 40px;">
+        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <div class="card-header" style="color: white; border-bottom-color: rgba(255,255,255,0.2);">📝 Assignments</div>
+            <div class="card-body">
+                <p>Submit and track your assignments</p>
+                <a href="{% url 'students:assignment_list' %}" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+                    View Assignments
+                </a>
+            </div>
+        </div>
+        
+        <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+            <div class="card-header" style="color: white; border-bottom-color: rgba(255,255,255,0.2);">👤 Profile</div>
+            <div class="card-body">
+                <p>Update your student profile</p>
+                <a href="{% url 'students:student_register' %}" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+                    Manage Profile
+                </a>
+            </div>
+        </div>
+        
+        <div class="card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+            <div class="card-header" style="color: white; border-bottom-color: rgba(255,255,255,0.2);">📚 Lectures</div>
+            <div class="card-body">
+                <p>Access available lectures</p>
+                <a href="{% url 'students:assignment_list' %}" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); border: none; color: white;">
+                    Browse Lectures
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Academic Overview -->
+    <div class="card" style="margin-bottom: 30px;">
+        <div class="card-header">📊 Academic Overview</div>
+        <div class="card-body">
+            <div class="dashboard-grid">
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="color: #28a745; margin: 0;">92%</h3>
+                    <p style="margin: 5px 0 0 0; color: #666;">Attendance</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="color: #007bff; margin: 0;">8.7</h3>
+                    <p style="margin: 5px 0 0 0; color: #666;">CGPA</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h3 style="color: #ffc107; margin: 0;">5</h3>
+                    <p style="margin: 5px 0 0 0; color: #666;">Pending Assignments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="dashboard-grid">
+        <div class="card">
+            <div class="card-header">📢 Latest Notices</div>
+            <div class="card-body">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        ⚙️ Lab sessions rescheduled to Friday
+                    </li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        🎓 Project submission deadline: Nov 10
+                    </li>
+                    <li style="padding: 10px 0;">
+                        📚 Mid-sem results out on portal
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">📅 Upcoming Events</div>
+            <div class="card-body">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        🏆 Sports Day - Nov 15
+                    </li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;">
+                        💻 Tech Fest - Dec 3
+                    </li>
+                    <li style="padding: 10px 0;">
+                        🎄 Semester Break - Starts Dec 20
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Stats -->
+    <div class="card" style="margin-top: 30px;">
+        <div class="card-header">⚡ Quick Actions</div>
+        <div class="card-body" style="text-align: center;">
+            <a href="{% url 'students:upload_assignment' %}" class="btn btn-primary" style="margin: 0 10px 10px 0;">
+                📤 Submit Assignment
+            </a>
+            <a href="{% url 'students:assignment_list' %}" class="btn btn-success" style="margin: 0 10px 10px 0;">
+                📋 View All Assignments
+            </a>
+            <a href="{% url 'students:student_register' %}" class="btn btn-secondary" style="margin: 0 10px 10px 0;">
+                ⚙️ Update Profile
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 20px; margin-top: 40px; color: #666; border-top: 1px solid #e0e0e0;">
+    <p>© 2025 TMYS School Management System. All Rights Reserved.</p>
+</footer>
+{% endblock %}

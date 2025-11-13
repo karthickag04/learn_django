@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Payment Page</h2>
+
+{% if order %}
+  <p><strong>Order ID:</strong> {{ order.id }}</p>
+  <p><strong>Amount:</strong> ₹ {{ order.total }}</p>
+  <p><strong>Status:</strong> Pending</p>
+
+  <div style="margin-top:20px;">
+    <a href="{% url 'ecart:payment_success' %}" style="background:#28a745;color:white;padding:8px 12px;text-decoration:none;border-radius:5px;">Pay Now</a>
+    <a href="{% url 'ecart:payment_cancel' %}" style="background:#dc3545;color:white;padding:8px 12px;text-decoration:none;border-radius:5px;">Cancel Payment</a>
+  </div>
+{% else %}
+  <p>No active order found.</p>
+{% endif %}
+{% endblock %}

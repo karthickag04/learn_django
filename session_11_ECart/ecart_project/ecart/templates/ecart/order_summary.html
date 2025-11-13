@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Order Summary</h2>
+
+{% if order %}
+  <p><strong>Order ID:</strong> {{ order.id }}</p>
+  <p><strong>Name:</strong> {{ order.name }}</p>
+  <p><strong>Phone:</strong> {{ order.phone }}</p>
+  <p><strong>Address:</strong> {{ order.address }}</p>
+  <p><strong>Total:</strong> ₹ {{ order.total }}</p>
+  <p><strong>Status:</strong> Pending</p>
+
+  <p>Thank you! Your order placed successfully.</p>
+  <a href="{% url 'ecart:home' %}" style="background:#007bff;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;">Continue Shopping</a>
+{% else %}
+  <p>No order found 😅</p>
+{% endif %}
+{% endblock %}

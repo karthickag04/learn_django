@@ -1,0 +1,176 @@
+/* ============================================
+   STAR RATING STYLES
+   ============================================ */
+
+/* Interactive Star Rating Container */
+.star-rating {
+    display: inline-flex;
+    font-size: 2.5rem;
+    cursor: pointer;
+    direction: ltr;
+    user-select: none;
+    margin: 10px 0;
+    gap: 5px;
+}
+
+/* Individual Star Styling */
+.star {
+    color: #ddd;
+    transition: all 0.2s ease;
+    padding: 0 5px;
+    display: inline-block;
+}
+
+/* Hover State */
+.star:hover {
+    color: #ffed4e;
+    transform: scale(1.1);
+}
+
+/* Active/Selected State */
+.star.active {
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Hovered Preview State */
+.star.hovered {
+    color: #ffed4e;
+}
+
+/* Star Container Shake Animation (for validation) */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Read-only Stars (for displaying existing reviews) */
+.review-stars {
+    display: inline-flex;
+    font-size: 1.2rem;
+    gap: 2px;
+    margin-right: 10px;
+}
+
+.star-readonly {
+    color: #ddd;
+}
+
+.star-readonly.filled {
+    color: #ffd700;
+}
+
+/* Rating Label/Text */
+.rating-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Form Section Styling */
+.review-form-section {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.review-form-section h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Review Display Styling */
+.review-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.review-username {
+    font-weight: bold;
+    color: #333;
+}
+
+.review-date {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.review-comment {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .star-rating {
+        font-size: 2rem;
+    }
+    
+    .star {
+        padding: 0 3px;
+    }
+    
+    .review-stars {
+        font-size: 1rem;
+    }
+}
+
+/* Focus state for accessibility */
+.star:focus {
+    outline: 2px solid #ffd700;
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* Disabled state (if needed) */
+.star-rating.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Rating hint text */
+.rating-hint {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Star tooltip labels (optional enhancement) */
+.star[data-value="1"]::after { content: attr(data-label); }
+.star[data-value="2"]::after { content: attr(data-label); }
+.star[data-value="3"]::after { content: attr(data-label); }
+.star[data-value="4"]::after { content: attr(data-label); }
+.star[data-value="5"]::after { content: attr(data-label); }
+
+.star::after {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: #666;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.star:hover::after {
+    opacity: 1;
+}

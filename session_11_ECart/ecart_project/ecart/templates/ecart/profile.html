@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Profile</h2>
+
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+
+<hr>
+
+<h3>Your Orders</h3>
+{% if orders %}
+  <table border="1" cellpadding="8" style="border-collapse:collapse;">
+    <tr>
+      <th>Order ID</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+    {% for o in orders %}
+      <tr>
+        <td>{{ o.id }}</td>
+        <td>₹ {{ o.total_amount }}</td>
+        <td>{{ o.payment_status }}</td>
+        <td>{{ o.created_at|date:"Y-m-d H:i" }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No orders yet.</p>
+{% endif %}
+
+<a href="{% url 'ecart:logout' %}" style="color:red;">Logout</a>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'ecart/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div style="display:flex;gap:20px;">
+  {% if product.get_image_url %}
+  <img src="{{ product.get_image_url }}" alt="{{ product.name }}" width="300" style="max-height:400px;object-fit:cover;">
+  {% endif %}
+
+  <div>
+    <h2>{{ product.name }}</h2>
+    <p><strong>Price:</strong> ₹ {{ product.price }}</p>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+
+    <button disabled style="padding:8px 12px;background:#ccc;">Add to Cart (Next Phase)</button>
+  </div>
+</div>
+
+<button>
+  <a href="{% url 'ecart:add_cart' product.id %}"
+    style="text-decoration:none;color:white;background:#28a745;padding:8px 12px;border-radius:5px;">Add to Cart</a>
+</button>
+
+<hr>
+<h3>Customer Reviews ({{ reviews|length }})</h3>
+
+{% for r in reviews %}
+<div class="review-item">
+  <div class="review-header">
+    <span class="review-username">
+      {% if r.user %}
+        {{ r.user.username }}
+      {% else %}
+        Guest
+      {% endif %}
+    </span>
+    <div class="review-stars" data-rating="{{ r.rating }}"></div>
+    <span class="review-date">{{ r.created_at|date:"M d, Y" }}</span>
+  </div>
+  <p class="review-comment">{{ r.comment }}</p>
+</div>
+{% empty %}
+<p>No reviews yet. Be the first to review this product!</p>
+{% endfor %}
+
+<div class="review-form-section">
+  <h4>Write a Review</h4>
+  <form method="POST">
+    {% csrf_token %}
+    
+    <div style="margin-bottom: 15px;">
+      <label class="rating-label">Your Rating:</label>
+      <div class="star-rating" data-rating="0">
+        <span class="star" data-value="1" tabindex="0">☆</span>
+        <span class="star" data-value="2" tabindex="0">☆</span>
+        <span class="star" data-value="3" tabindex="0">☆</span>
+        <span class="star" data-value="4" tabindex="0">☆</span>
+        <span class="star" data-value="5" tabindex="0">☆</span>
+      </div>
+      <input type="hidden" name="rating" id="rating-input" value="0">
+      <span class="rating-hint">Click to select your rating (or press 1-5 on keyboard)</span>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <label for="id_comment" style="display:block; font-weight:bold; margin-bottom:5px;">Your Review:</label>
+      {{ form.comment }}
+    </div>
+    
+    <button type="submit" style="background:#28a745;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;font-size:16px;">
+      Submit Review
+    </button>
+  </form>
+</div>
+
+{% block extra_js %}
+<script src="{% static 'ecart/js/star_rating.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

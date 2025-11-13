@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>All Products</h1>
+
+<div style="margin-bottom:15px;">
+ <h3>Filter by Category:</h3>
+<form method="get" action="">
+  <select name="category" onchange="this.form.submit()">
+    <option value="">All</option>
+    {% for c in categories %}
+      <option value="{{ c.slug }}" {% if request.GET.category == c.slug %}selected{% endif %}>{{ c.name }}</option>
+    {% endfor %}
+  </select>
+</form>
+
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:20px;">
+  {% for p in products %}
+    <div style="border:1px solid #ddd;padding:10px;width:200px;">
+      {% if p.get_image_url %}
+        <img src="{{ p.get_image_url }}" alt="{{ p.name }}" width="180" style="max-height:200px;object-fit:cover;">
+      {% endif %}
+      <h4>{{ p.name }}</h4>
+      <p>₹ {{ p.price }}</p>
+      <a href="{% url 'ecart:product_detail' p.slug %}">View Details</a>
+    </div>
+  {% empty %}
+    <p>No products available.</p>
+  {% endfor %}
+</div>
+
+
+
+{% endblock %}

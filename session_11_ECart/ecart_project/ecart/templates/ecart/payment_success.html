@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Payment Success</h2>
+<p>🎉 Your payment has been successfully processed!</p>
+<p><strong>Order ID:</strong> {{ order.id }}</p>
+<p><strong>Amount:</strong> ₹ {{ order.total }}</p>
+<p><strong>Status:</strong> Paid</p>
+<a href="{% url 'ecart:profile' %}" style="background:#007bff;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;">View in Profile</a>
+{% endblock %}

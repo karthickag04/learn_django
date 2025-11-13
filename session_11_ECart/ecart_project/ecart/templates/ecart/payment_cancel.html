@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Payment Cancelled</h2>
+<p>⚠️ Your payment has been cancelled.</p>
+<p><strong>Order ID:</strong> {{ order.id }}</p>
+<p><strong>Amount:</strong> ₹ {{ order.total }}</p>
+<p><strong>Status:</strong> Cancelled</p>
+<a href="{% url 'ecart:home' %}" style="background:#007bff;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;">Back to Home</a>
+{% endblock %}

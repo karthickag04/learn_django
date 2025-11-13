@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Category: {{ category.name }}</h2>
+
+<div style="display:flex;flex-wrap:wrap;gap:20px;">
+  {% for p in products %}
+    <div style="border:1px solid #ddd;padding:10px;width:200px;">
+      {% if p.get_image_url %}
+        <img src="{{ p.get_image_url }}" alt="{{ p.name }}" width="180" style="max-height:200px;object-fit:cover;">
+      {% endif %}
+      <h4>{{ p.name }}</h4>
+      <p>₹ {{ p.price }}</p>
+      <a href="{% url 'ecart:product_detail' p.slug %}">View Details</a>
+    </div>
+  {% empty %}
+    <p>No products in this category.</p>
+  {% endfor %}
+</div>
+<a href="{% url 'ecart:home' %}">← Back to all products</a>
+{% endblock %}

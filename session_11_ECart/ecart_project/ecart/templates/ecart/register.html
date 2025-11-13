@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Register</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <table>{{ form.as_table }}</table>
+  <button type="submit" style="background:#28a745;color:white;padding:8px 12px;border:none;border-radius:5px;">Register</button>
+</form>
+
+<p>Already have account? <a href="{% url 'ecart:login' %}">Login here</a></p>
+{% endblock %}

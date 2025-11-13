@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Checkout</h2>
+
+{% if data.items %}
+  <h4>Total Payable: ₹ {{ data.total }}</h4>
+
+  <form method="POST">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit" style="background:#28a745;color:white;padding:8px 12px;border:none;border-radius:5px;">Place Order</button>
+  </form>
+{% else %}
+  <p>Cart empty da! 😅</p>
+  <a href="{% url 'ecart:home' %}">← Go Shopping</a>
+{% endif %}
+{% endblock %}

@@ -7,6 +7,8 @@ body {
   padding: 0;
 }
 
+
+
 h1 {
   color: #0066cc !important;
   font-size: 2rem;
@@ -17,6 +19,7 @@ h2 {
 }
 
 nav {
+  margin-top: 0px !important;
   background: #0066cc !important;
   padding: 15px !important;
 }
@@ -34,7 +37,9 @@ nav a:hover {
 
 main {
   margin: 20px;
+  border: 2px solid #dcdd33 !important;
   min-height: 400px;
+  padding: 20px !important;
 }
 
 footer {
@@ -48,4 +53,36 @@ footer {
 footer p {
   color: white !important;
   margin: 0;
+}
+
+
+.header{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  /* gap: 40px !important; */
+  background-color: #0066cc !important;
+  padding: 20px !important;
+}
+
+.header h1, .header h3{
+  color: white !important;
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+/* .header h3{
+  font-size: 12px !important;
+} */
+
+
+.header .left-title{
+  display: flex !important;
+  align-items: center !important;
+}
+
+.header .left-title img.logo-img{
+  height: 50px !important;
+  width: 50px !important;
+  margin-right: 15px !important;
 }

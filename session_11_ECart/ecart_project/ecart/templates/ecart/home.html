@@ -1,8 +1,20 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+ {% block extra_css %}
+  <link rel="stylesheet" href="{% static 'ecart/css/style.css' %}">
+{% endblock %}
+
+{% block headertitle %} Home {% endblock %}
+
 {% block content %}
+
+<div class="header">
+
 <h1>All Products</h1>
 
-<div style="margin-bottom:15px;">
+<div style="margin-bottom:15px;" class="left-title">
  <h3>Filter by Category:</h3>
 <form method="get" action="">
   <select name="category" onchange="this.form.submit()">
@@ -15,15 +27,19 @@
 
 </div>
 
+</div>
 <div style="display:flex;flex-wrap:wrap;gap:20px;">
   {% for p in products %}
-    <div style="border:1px solid #ddd;padding:10px;width:200px;">
+    <div class="card-home">
       {% if p.get_image_url %}
+      
         <img src="{{ p.get_image_url }}" alt="{{ p.name }}" width="180" style="max-height:200px;object-fit:cover;">
       {% endif %}
-      <h4>{{ p.name }}</h4>
+      <div class="card-details">
+      <h4 id="card__product_title">{{ p.name }}</h4>
       <p>₹ {{ p.price }}</p>
       <a href="{% url 'ecart:product_detail' p.slug %}">View Details</a>
+      </div>
     </div>
   {% empty %}
     <p>No products available.</p>
@@ -32,4 +48,9 @@
 
 
 
+{% endblock %}
+
+
+{% block footer %}
+<h1>this is footer content of home</h1>
 {% endblock %}

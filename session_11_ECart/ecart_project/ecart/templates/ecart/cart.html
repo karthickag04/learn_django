@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+
+{% block headertitle %} Cart {% endblock %}
+
+
 {% block content %}
 <h2>Your Cart</h2>
 
@@ -30,5 +34,11 @@
 <a href="{% url 'ecart:home' %}">← Continue Shopping</a>
 {% endif %}
 <a href="{% url 'ecart:checkout' %}" style="background:#007bff;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;">Proceed to Checkout</a>
+
+{% endblock %}
+
+
+{% block footer %}
+<h1>this is footer content of cart</h1>
 
 {% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'ecart/css/style.css' %}" />
+    {% endblock %}
+
+
+{% block headertitle %} Products
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Product List</h1>
+
+{{ productlist.count }} products found.
+
+
+<div class="new" style="display: flex; flex-direction: row;">
+{% for product in productlist %}
+
+
+<div class="card-home" >
+
+    <div class="card-details">
+        <img src="{{ product.get_image_url }}" alt="">
+        <h4>{{ product.product_name }}</h4>
+        <p>₹ {{ product.product_price }}</p>
+       
+    </div>
+    
+
+    </div>
+
+
+<!-- {{ product.product_name }} - ₹{{ product.product_price }}  -->
+
+
+
+{% endfor %}
+
+</div>
+
+<div class="new" style="display: flex; flex-direction: row;">
+{% for product1 in productlist %}
+
+
+
+    <div class="card-details">
+        <h4>{{ product1.product_name }}</h4>
+        <p>₹ {{ product1.product_price }}</p>
+       
+    </div>
+    
+
+ 
+{% endfor %}
+
+</div>
+
+{% endblock %}

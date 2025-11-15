@@ -23,6 +23,7 @@ from . import admin as admin_config
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ecart.urls')),
+    path('products/', include('products.urls')),
 ]
 
 if settings.DEBUG:

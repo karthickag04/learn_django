@@ -1,3 +1,7 @@
+New Django_project creation steps
+https://chatgpt.com/share/69954d37-df20-800b-8cc0-4696f35082dc
+
+
 Chat Ref on Static file loading
 https://chatgpt.com/share/68e395e9-1f24-800b-a7ea-75285f4d6229
 
